@@ -1,5 +1,5 @@
 // Require Libraries
-const express = require('express');
+const express = require('express'); // initialize
 const Tenor = require("tenorjs").client({
   // Replace with your own key
   "Key": "FFW82BDQX8XO", // https://tenor.com/developer/keyregistration
@@ -8,13 +8,14 @@ const Tenor = require("tenorjs").client({
 });
 
 // App Setup
-const app = express();
+const app = express(); // define 
 
 // Middleware
 const exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
+app.use(express.static('public'));
 
 // Routes
 // app.get('/', (req, res) => {
@@ -22,8 +23,8 @@ app.set('view engine', 'handlebars');
 //   res.render('hello-gif', { gifUrl });
 // });
 
-app.get('/', (req, res) => {
-  console.log(req.query) // => "{ term: hey" }
+app.get('/', (req, res) => { //request, response.  req: get forms .params: routes .res: responses
+  console.log(req.query) // callback fn
 
   term = ""
   if (req.query.term) {
@@ -46,6 +47,6 @@ app.get('/greetings/:name', (req, res) => {
 
 // Start Server
 
-app.listen(3000, () => {
+app.listen(3000, () => { // tells the server to start listening
   console.log('Gif Search listening on port localhost:3000!');
 });
